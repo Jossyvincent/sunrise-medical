@@ -9,6 +9,8 @@ import android.database.Cursor;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class Database extends SQLiteOpenHelper {
 
     //Database constants
@@ -53,6 +55,8 @@ public class Database extends SQLiteOpenHelper {
                 COLUMN_PHONE + " TEXT, " +
                 COLUMN_DOCTOR_EMAIL + " TEXT)";
         db.execSQL(CREATE_DOCTORS_TABLE);
+
+        populateDoctorTable(db);
     }
 
     @Override
@@ -81,6 +85,106 @@ public class Database extends SQLiteOpenHelper {
         }
 
     }
+    // to add data to the doctors table
+    private void populateDoctorTable(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME, "Emmanuel Okoda");
+        values.put(COLUMN_SPECIALITY, "FAMILY PHYSICIAN");
+        values.put(COLUMN_PHONE, "555-678");
+        values.put(COLUMN_DOCTOR_EMAIL, "emmanuel@gmail.com");
+        db.insert(TABLE_DOCTORS,null, values);
+
+        values.put(COLUMN_NAME, "Innocent Leaky");
+        values.put(COLUMN_SPECIALITY, "DIETICIAN");
+        values.put(COLUMN_PHONE, "553-658");
+        values.put(COLUMN_DOCTOR_EMAIL, "leaky@gmail.com");
+        db.insert(TABLE_DOCTORS,null, values);
+
+        values.put(COLUMN_NAME, "Arnold Favour");
+        values.put(COLUMN_SPECIALITY, "DENTIST");
+        values.put(COLUMN_PHONE, "555-000");
+        values.put(COLUMN_DOCTOR_EMAIL, "arnold@gmail.com");
+        db.insert(TABLE_DOCTORS,null, values);
+
+        values.put(COLUMN_NAME, "Balozi Eugene");
+        values.put(COLUMN_SPECIALITY, "SURGEON");
+        values.put(COLUMN_PHONE, "555-890");
+        values.put(COLUMN_DOCTOR_EMAIL, "balozi@gmail.com");
+        db.insert(TABLE_DOCTORS,null, values);
+
+        values.put(COLUMN_NAME, "Vincent Jossy");
+        values.put(COLUMN_SPECIALITY, "CARDIOLOGIST");
+        values.put(COLUMN_PHONE, "555-678");
+        values.put(COLUMN_DOCTOR_EMAIL, "jossy@gmail.com");
+        db.insert(TABLE_DOCTORS,null, values);
+    }
+
+    //get ALL doctors method
+    public ArrayList<Doctor> getAllDoctors() {
+        ArrayList<Doctor> doctorList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_DOCTORS, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Doctor doctor = new Doctor();
+
+                doctor.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+                doctor.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+                doctor.setSpecialty(cursor.getString(cursor.getColumnIndexOrThrow("speciality")));
+                doctor.setPhone(cursor.getString(cursor.getColumnIndexOrThrow("phone")));
+                doctor.setEmail(cursor.getString(cursor.getColumnIndexOrThrow("email")));
+
+                doctorList.add(doctor);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return doctorList;
+    }
+// the doctor class
+public class Doctor {
+    private int id;
+    private String name;
+    private String specialty;
+    private String phone;
+    private String email;
+
+    // Getters and setters
+    public int getId() {
+        return id;}
+
+    public void setId(int id) {
+        this.id = id;}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;}
+
+    public String getSpecialty() {
+        return specialty;}
+
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;}
+
+    public String getPhone() {
+        return phone;}
+
+    public void setPhone(String phone) {
+        this.phone = phone;}
+    public String getEmail(){
+        return email;}
+    public void setEmail(String email){
+        this.email = email;}
+}
+
+// the doctor Adapter class
+
     public boolean checkUser(String email, String password){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_EMAIL + " = ? AND "
