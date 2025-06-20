@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back1"
-    tools:context=".doctordetail">
+    tools:context=".ui.doctordetail">
 
     <TextView
         android:id="@+id/textView"
@@ -26,7 +26,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Default text"
+        android:text="OUR DOCTORS"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"

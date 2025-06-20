@@ -1,4 +1,4 @@
-package com.example.healthapp;
+package com.example.healthapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.healthapp.R;
+import com.example.healthapp.database.Database;
 
 public class login extends AppCompatActivity {
     //declaring widgets

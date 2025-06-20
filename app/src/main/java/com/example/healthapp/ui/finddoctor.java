@@ -1,4 +1,4 @@
-package com.example.healthapp;
+package com.example.healthapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.healthapp.R;
 
 public class finddoctor extends AppCompatActivity {
 
@@ -24,7 +26,7 @@ public class finddoctor extends AppCompatActivity {
         familyphysician.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(finddoctor.this,doctordetail.class);
+                Intent it = new Intent(finddoctor.this, doctordetail.class);
                 it.putExtra("title", "family physician");
                 startActivity(it);
             }

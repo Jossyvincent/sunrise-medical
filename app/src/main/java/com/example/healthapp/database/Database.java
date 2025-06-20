@@ -1,4 +1,4 @@
-package com.example.healthapp;
+package com.example.healthapp.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,8 +6,9 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
-import android.util.Log;
 import android.widget.Toast;
+
+import com.example.healthapp.models.Doctor;
 
 import java.util.ArrayList;
 
@@ -144,46 +145,6 @@ public class Database extends SQLiteOpenHelper {
         db.close();
         return doctorList;
     }
-// the doctor class
-public class Doctor {
-    private int id;
-    private String name;
-    private String specialty;
-    private String phone;
-    private String email;
-
-    // Getters and setters
-    public int getId() {
-        return id;}
-
-    public void setId(int id) {
-        this.id = id;}
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;}
-
-    public String getSpecialty() {
-        return specialty;}
-
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;}
-
-    public String getPhone() {
-        return phone;}
-
-    public void setPhone(String phone) {
-        this.phone = phone;}
-    public String getEmail(){
-        return email;}
-    public void setEmail(String email){
-        this.email = email;}
-}
-
-// the doctor Adapter class
 
     public boolean checkUser(String email, String password){
         SQLiteDatabase db = this.getReadableDatabase();

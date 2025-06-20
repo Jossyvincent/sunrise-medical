@@ -1,4 +1,4 @@
-package com.example.healthapp;
+package com.example.healthapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.healthapp.R;
 
 public class home extends AppCompatActivity {
     //declaring widgets
@@ -38,7 +40,7 @@ public class home extends AppCompatActivity {
         finddoctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(home.this,finddoctor.class);
+              Intent intent = new Intent(home.this, finddoctor.class);
               startActivity(intent);
               finish();
             }
