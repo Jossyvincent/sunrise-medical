@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.healthapp.R;
 
-public class home extends AppCompatActivity {
+public class Home extends AppCompatActivity {
     //declaring widgets
 
 
@@ -28,7 +28,7 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //will add the code for shared preference
-                Intent intent = new Intent(home.this, login.class);
+                Intent intent = new Intent(Home.this, Login.class);
                 //clearing back stack
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -40,7 +40,7 @@ public class home extends AppCompatActivity {
         finddoctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(home.this, finddoctor.class);
+              Intent intent = new Intent(Home.this, Finddoctor.class);
               startActivity(intent);
               finish();
             }

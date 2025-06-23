@@ -2,7 +2,6 @@ package com.example.healthapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,7 +19,7 @@ import com.example.healthapp.database.Database;
 
 import java.util.ArrayList;
 
-public class doctordetail extends AppCompatActivity {
+public class Doctor_detail extends AppCompatActivity {
 
     private ListView listView;
     private DoctorAdapter adapter;
@@ -44,13 +43,13 @@ public class doctordetail extends AppCompatActivity {
 
         // Initialize the database
         dbHelper = new Database(this);
-        doctorList = dbHelper.getAllDoctors(); // Get all doctors from DB
+        doctorList = dbHelper.getDoctorsByCategory(title); // Get all doctors from DB
         adapter = new DoctorAdapter(this, doctorList); // Create adapter
         listView.setAdapter(adapter); // Attach adapter to ListView
 
         // Back button functionality
         btn.setOnClickListener(v -> {
-            Intent intent = new Intent(doctordetail.this, finddoctor.class);
+            Intent intent = new Intent(Doctor_detail.this, Finddoctor.class);
             startActivity(intent);
             finish();
         });

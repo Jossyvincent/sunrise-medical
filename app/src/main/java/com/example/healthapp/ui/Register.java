@@ -62,7 +62,7 @@ public class Register extends AppCompatActivity {
                         boolean success = dbHelper.registerUser(username, email, password, Register.this);
                         if (success) {
                             Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Register.this, login.class);
+                            Intent intent = new Intent(Register.this, Login.class);
                             startActivity(intent);
                             finish();
                         }
@@ -93,7 +93,7 @@ public class Register extends AppCompatActivity {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Register.this, login .class));
+                startActivity(new Intent(Register.this, Login.class));
 
             }
         });

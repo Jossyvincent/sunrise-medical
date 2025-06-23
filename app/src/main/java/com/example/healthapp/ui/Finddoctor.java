@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.healthapp.R;
 
-public class finddoctor extends AppCompatActivity {
+public class Finddoctor extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +26,8 @@ public class finddoctor extends AppCompatActivity {
         familyphysician.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(finddoctor.this, doctordetail.class);
-                it.putExtra("title", "family physician");
+                Intent it = new Intent(Finddoctor.this, Doctor_detail.class);
+                it.putExtra("title", "FAMILY PHYSICIAN");
                 startActivity(it);
             }
         });
@@ -36,8 +36,8 @@ public class finddoctor extends AppCompatActivity {
         dentist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(finddoctor.this,doctordetail.class);
-                it.putExtra("title", "Dentist");
+                Intent it = new Intent(Finddoctor.this, Doctor_detail.class);
+                it.putExtra("title", "DENTIST");
                 startActivity(it);
             }
         });
@@ -46,19 +46,19 @@ public class finddoctor extends AppCompatActivity {
         cardiologist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(finddoctor.this,doctordetail.class);
-                it.putExtra("title", "Cardiologist");
+                Intent it = new Intent(Finddoctor.this, Doctor_detail.class);
+                it.putExtra("title", "CARDIOLOGIST");
                 startActivity(it);
             }
         });
 
-        // dietician
+        // dietitian
         CardView dietician = findViewById(R.id.dietician);
         dietician.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(finddoctor.this,doctordetail.class);
-                it.putExtra("title", "Dietician");
+                Intent it = new Intent(Finddoctor.this, Doctor_detail.class);
+                it.putExtra("title", "DIETITIAN");
                 startActivity(it);
             }
         });
@@ -68,8 +68,8 @@ public class finddoctor extends AppCompatActivity {
         surgeon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(finddoctor.this,doctordetail.class);
-                it.putExtra("title", "Surgeon");
+                Intent it = new Intent(Finddoctor.this, Doctor_detail.class);
+                it.putExtra("title", "SURGEON");
                 startActivity(it);
             }
         });
@@ -79,7 +79,7 @@ public class finddoctor extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(finddoctor.this, home.class));
+                startActivity(new Intent(Finddoctor.this, Home.class));
 
             }
         });

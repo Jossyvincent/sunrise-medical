@@ -4,6 +4,8 @@ public class Doctor {
     private int id;
     private String name;
     private String specialty;
+    private String hospital;
+    private double fee;
     private String phone;
     private String email;
 
@@ -13,6 +15,19 @@ public class Doctor {
 
     public void setId(int id) {
         this.id = id;}
+
+    public String getHospital() {
+        return hospital;}
+
+    public void setHospital(String hospital) {
+        this.hospital = this.hospital;
+    }
+    public double getFee(){
+        return fee;
+    }
+    public void setFee(double fee) {
+        this.fee = this.fee;
+    }
 
     public String getName() {
         return name;

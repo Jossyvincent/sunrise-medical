@@ -47,11 +47,15 @@ public class DoctorAdapter extends BaseAdapter {
         TextView nameTextView = convertView.findViewById(R.id.doctor_name);
         TextView specialtyTextView = convertView.findViewById(R.id.doctor_specialty);
         TextView contactTextView = convertView.findViewById(R.id.doctor_contact);
+        TextView hospitalTextView = convertView.findViewById(R.id.doctor_hospital);
+        TextView feeTextView = convertView.findViewById(R.id.doctor_fee);
+
 
         nameTextView.setText(doctor.getName());
         specialtyTextView.setText(doctor.getSpecialty());
-        contactTextView.setText(doctor.getPhone()); // or doctor.getEmail()
-
+        contactTextView.setText(doctor.getPhone());
+        hospitalTextView.setText(doctor.getHospital());
+        feeTextView.setText("Ksh " + doctor.getFee());
         return convertView;
     }
 }

@@ -19,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.healthapp.R;
 import com.example.healthapp.database.Database;
 
-public class login extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     //declaring widgets
     EditText Email,Password ;
     Button LoginBtn;
@@ -47,12 +47,12 @@ public class login extends AppCompatActivity {
                 String email = Email.getText().toString();
                 String password = Password.getText().toString();
                 if(email.trim().isEmpty() || password.trim().isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Username and password fields cant be blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Username and password fields can't be blank", Toast.LENGTH_SHORT).show();
                 } else{
                     boolean valid = dbHelper.checkUser(email,password);
                     if (valid) {
                         Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(login.this, home.class);
+                        Intent intent = new Intent(Login.this, Home.class);
                         startActivity(intent);
                         finish();
                     }  else {
@@ -79,7 +79,7 @@ public class login extends AppCompatActivity {
         NewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(login.this, Register.class));
+                startActivity(new Intent(Login.this, Register.class));
 
             }
         });

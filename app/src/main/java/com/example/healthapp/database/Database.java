@@ -28,9 +28,11 @@ public class Database extends SQLiteOpenHelper {
     private static final String TABLE_DOCTORS = "doctors";
     private static final String COLUMN_DOCTOR_ID = "id";
     private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_SPECIALITY = "speciality";
+    private static final String COLUMN_SPECIALTY = "specialty";
     private static final String COLUMN_PHONE = "phone";
     private static final String COLUMN_DOCTOR_EMAIL = "email";
+    private static final String COLUMN_HOSPITAL = "hospital";
+    private static final String COLUMN_FEE = "fee";
 
 
     // The constructor
@@ -52,7 +54,9 @@ public class Database extends SQLiteOpenHelper {
         String CREATE_DOCTORS_TABLE = "CREATE TABLE " + TABLE_DOCTORS + " (" +
                 COLUMN_DOCTOR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_NAME + " TEXT NOT NULL, " +
-                COLUMN_SPECIALITY + " TEXT, " +
+                COLUMN_SPECIALTY + " TEXT, " +
+                COLUMN_HOSPITAL + " TEXT, " +
+                COLUMN_FEE + " REAL, " +
                 COLUMN_PHONE + " TEXT, " +
                 COLUMN_DOCTOR_EMAIL + " TEXT)";
         db.execSQL(CREATE_DOCTORS_TABLE);
@@ -90,32 +94,42 @@ public class Database extends SQLiteOpenHelper {
     private void populateDoctorTable(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, "Emmanuel Okoda");
-        values.put(COLUMN_SPECIALITY, "FAMILY PHYSICIAN");
+        values.put(COLUMN_SPECIALTY, "FAMILY PHYSICIAN");
         values.put(COLUMN_PHONE, "555-678");
+        values.put(COLUMN_FEE, 1000 );
+        values.put(COLUMN_HOSPITAL, "Sunrise medical clinic");
         values.put(COLUMN_DOCTOR_EMAIL, "emmanuel@gmail.com");
         db.insert(TABLE_DOCTORS,null, values);
 
         values.put(COLUMN_NAME, "Innocent Leaky");
-        values.put(COLUMN_SPECIALITY, "DIETICIAN");
+        values.put(COLUMN_SPECIALTY, "DIETITIAN");
         values.put(COLUMN_PHONE, "553-658");
+        values.put(COLUMN_FEE, 1500 );
+        values.put(COLUMN_HOSPITAL, "Hawai-Kisumu");
         values.put(COLUMN_DOCTOR_EMAIL, "leaky@gmail.com");
         db.insert(TABLE_DOCTORS,null, values);
 
         values.put(COLUMN_NAME, "Arnold Favour");
-        values.put(COLUMN_SPECIALITY, "DENTIST");
+        values.put(COLUMN_SPECIALTY, "DENTIST");
         values.put(COLUMN_PHONE, "555-000");
+        values.put(COLUMN_FEE, 2000 );
+        values.put(COLUMN_HOSPITAL, "Bliss Medical Centre");
         values.put(COLUMN_DOCTOR_EMAIL, "arnold@gmail.com");
         db.insert(TABLE_DOCTORS,null, values);
 
         values.put(COLUMN_NAME, "Balozi Eugene");
-        values.put(COLUMN_SPECIALITY, "SURGEON");
+        values.put(COLUMN_SPECIALTY, "SURGEON");
         values.put(COLUMN_PHONE, "555-890");
+        values.put(COLUMN_FEE, 1000 );
+        values.put(COLUMN_HOSPITAL, "Avenue-Nairobi");
         values.put(COLUMN_DOCTOR_EMAIL, "balozi@gmail.com");
         db.insert(TABLE_DOCTORS,null, values);
 
         values.put(COLUMN_NAME, "Vincent Jossy");
-        values.put(COLUMN_SPECIALITY, "CARDIOLOGIST");
+        values.put(COLUMN_SPECIALTY, "CARDIOLOGIST");
         values.put(COLUMN_PHONE, "555-678");
+        values.put(COLUMN_FEE, 2500 );
+        values.put(COLUMN_HOSPITAL, "Doctors plaza");
         values.put(COLUMN_DOCTOR_EMAIL, "jossy@gmail.com");
         db.insert(TABLE_DOCTORS,null, values);
     }
@@ -133,9 +147,11 @@ public class Database extends SQLiteOpenHelper {
 
                 doctor.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
                 doctor.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
-                doctor.setSpecialty(cursor.getString(cursor.getColumnIndexOrThrow("speciality")));
+                doctor.setSpecialty(cursor.getString(cursor.getColumnIndexOrThrow("specialty")));
                 doctor.setPhone(cursor.getString(cursor.getColumnIndexOrThrow("phone")));
                 doctor.setEmail(cursor.getString(cursor.getColumnIndexOrThrow("email")));
+                doctor.setFee(cursor.getDouble(cursor.getColumnIndexOrThrow("fee")));
+                doctor.setHospital(cursor.getString(cursor.getColumnIndexOrThrow("hospital")));
 
                 doctorList.add(doctor);
             } while (cursor.moveToNext());
@@ -145,6 +161,28 @@ public class Database extends SQLiteOpenHelper {
         db.close();
         return doctorList;
     }
+    // methods to get doctors by category
+    public ArrayList<Doctor> getDoctorsByCategory(String category) {
+        ArrayList<Doctor> doctorList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM doctors WHERE specialty = ?", new String[]{category});
+        if (cursor.moveToFirst()) {
+            do {
+                Doctor doctor = new Doctor();
+                doctor.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+                doctor.setSpecialty(cursor.getString(cursor.getColumnIndexOrThrow("specialty")));
+                doctor.setHospital(cursor.getString(cursor.getColumnIndexOrThrow("hospital")));
+                doctor.setPhone(cursor.getString(cursor.getColumnIndexOrThrow("phone")));
+                doctor.setFee(cursor.getDouble(cursor.getColumnIndexOrThrow("fee")));
+                doctorList.add(doctor);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return doctorList;
+    }
+
 
     public boolean checkUser(String email, String password){
         SQLiteDatabase db = this.getReadableDatabase();
