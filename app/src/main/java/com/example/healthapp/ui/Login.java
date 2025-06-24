@@ -1,6 +1,7 @@
 package com.example.healthapp.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -52,6 +53,14 @@ public class Login extends AppCompatActivity {
                     boolean valid = dbHelper.checkUser(email,password);
                     if (valid) {
                         Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                        //getting username from DB using email
+                        String loggedInUsername = dbHelper.getUsernameByEmail(email);
+                        //storing username in SharedPreferences
+                        SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("username", loggedInUsername);
+                        editor.apply();
+
                         Intent intent = new Intent(Login.this, Home.class);
                         startActivity(intent);
                         finish();

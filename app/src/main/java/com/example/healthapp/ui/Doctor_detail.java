@@ -54,6 +54,22 @@ public class Doctor_detail extends AppCompatActivity {
             finish();
         });
 
+        // setting the ListView onClick Listener
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Doctor selectedDoctor = doctorList.get(position);
+
+            Intent intent = new Intent(Doctor_detail.this, Book_appointment.class);
+            intent.putExtra("doctor_name", selectedDoctor.getName());
+            intent.putExtra("specialty", selectedDoctor.getSpecialty());
+            intent.putExtra("hospital", selectedDoctor.getHospital());
+            intent.putExtra("fee", selectedDoctor.getFee());
+            intent.putExtra("phone", selectedDoctor.getPhone());
+
+            startActivity(intent);
+        });
+
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

@@ -34,6 +34,17 @@ public class Database extends SQLiteOpenHelper {
     private static final String COLUMN_HOSPITAL = "hospital";
     private static final String COLUMN_FEE = "fee";
 
+    //columns for the appointment table
+    private static final  String TABLE_APPOINTMENTS = "appointments";
+    private static final  String COLUMN_APPOINTMENT_ID = "id";
+    private static final  String COLUMN_DOCTOR_NAME = "doctor_name";
+    private static final  String COLUMN_APPOINTMENT_HOSPITAL = "hospital";
+    private static final  String COLUMN_APPOINTMENT_FEE = "fee";
+    private static final  String COLUMN_DOCTOR_NUMBER = "phone";
+    private static final  String COLUMN_APPOINTMENT_DATE = "date";
+    private static final  String COLUMN_APPOINTMENT_TIME ="time";
+    private static final  String COLUMN_PATIENT_NAME = "patient_name";
+
 
     // The constructor
     public Database(Context context) {
@@ -50,6 +61,19 @@ public class Database extends SQLiteOpenHelper {
                 COLUMN_EMAIL + " TEXT UNIQUE, " +
                 COLUMN_PASSWORD + " TEXT)";
         db.execSQL(CREATE_USERS_TABLE);
+
+        // create the appointments table
+        String CREATE_APPOINTMENTS_TABLE = "CREATE TABLE " + TABLE_APPOINTMENTS + " (" +
+                COLUMN_APPOINTMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_DOCTOR_NAME + " TEXT, " +
+                COLUMN_APPOINTMENT_HOSPITAL + " TEXT, " +
+                COLUMN_APPOINTMENT_FEE + " REAL, " +
+                COLUMN_DOCTOR_NUMBER + " TEXT, " +
+                COLUMN_APPOINTMENT_DATE + " TEXT, " +
+                COLUMN_PATIENT_NAME + " TEXT, " +
+                COLUMN_APPOINTMENT_TIME + " TEXT" + ")";
+        db.execSQL(CREATE_APPOINTMENTS_TABLE);
+
         // create doctors table
         String CREATE_DOCTORS_TABLE = "CREATE TABLE " + TABLE_DOCTORS + " (" +
                 COLUMN_DOCTOR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -60,7 +84,6 @@ public class Database extends SQLiteOpenHelper {
                 COLUMN_PHONE + " TEXT, " +
                 COLUMN_DOCTOR_EMAIL + " TEXT)";
         db.execSQL(CREATE_DOCTORS_TABLE);
-
         populateDoctorTable(db);
     }
 
@@ -161,6 +184,25 @@ public class Database extends SQLiteOpenHelper {
         db.close();
         return doctorList;
     }
+
+    // method to insert appointment
+     public boolean insertAppointment(String doctorName, String hospital, double fee, String phone,
+                              String date, String time, String patientName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("doctor_name", doctorName);
+        values.put("hospital", hospital);
+        values.put("fee", fee);
+        values.put("phone", phone);
+        values.put("appointment_date", date);
+        values.put("appointment_time", time);
+        values.put("patient_name", patientName);
+
+        long result = db.insert("appointments", null, values);
+        db.close();
+        return result != -1;
+    }
     // methods to get doctors by category
     public ArrayList<Doctor> getDoctorsByCategory(String category) {
         ArrayList<Doctor> doctorList = new ArrayList<>();
@@ -183,7 +225,22 @@ public class Database extends SQLiteOpenHelper {
         return doctorList;
     }
 
+    //method to get username by email
+    public String getUsernameByEmail(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT username FROM users WHERE email = ?", new String[]{email});
 
+        String username = null;
+        if (cursor.moveToFirst()) {
+            username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
+        }
+
+        cursor.close();
+        db.close();
+        return username;
+    }
+
+    // method to check if the user is available
     public boolean checkUser(String email, String password){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_EMAIL + " = ? AND "
