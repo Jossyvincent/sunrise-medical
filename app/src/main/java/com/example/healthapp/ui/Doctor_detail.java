@@ -34,7 +34,7 @@ public class Doctor_detail extends AppCompatActivity {
 
         TextView tv = findViewById(R.id.textView2);
         Button btn = findViewById(R.id.btnback);
-        listView = findViewById(R.id.listViewDoctors); // ✅ Find your ListView
+        listView = findViewById(R.id.listViewDoctors); //
 
         // Set title from previous activity
         Intent it = getIntent();

@@ -20,13 +20,13 @@ public class Doctor {
         return hospital;}
 
     public void setHospital(String hospital) {
-        this.hospital = this.hospital;
+        this.hospital = hospital;
     }
     public double getFee(){
         return fee;
     }
     public void setFee(double fee) {
-        this.fee = this.fee;
+        this.fee = fee;
     }
 
     public String getName() {
