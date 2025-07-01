@@ -45,6 +45,18 @@ public class Home extends AppCompatActivity {
               finish();
             }
         });
+        // appointment details card view
+        CardView appointmentDetails = findViewById(R.id.appointment_details);
+        appointmentDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, MyAppointments.class);
+                startActivity(intent);
+                finish();
+            }
+
+            });
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

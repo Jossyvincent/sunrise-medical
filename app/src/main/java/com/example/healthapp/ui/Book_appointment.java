@@ -30,17 +30,14 @@ public class Book_appointment extends AppCompatActivity {
     EditText full_name,address, fee,phone_number,editTextDate,editTextTime ;
     Button register;
 
-    SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
-    Database db = new Database(this);
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_book_appointment);
         // instantiating the widgets
+        SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
+        Database db = new Database(this);
         tv = findViewById(R.id.book_appt);
         full_name = findViewById(R.id.editTextfullname);
         address = findViewById(R.id.editTextaddress);

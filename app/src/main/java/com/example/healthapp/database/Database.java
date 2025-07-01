@@ -195,8 +195,8 @@ public class Database extends SQLiteOpenHelper {
         values.put("hospital", hospital);
         values.put("fee", fee);
         values.put("phone", phone);
-        values.put("appointment_date", date);
-        values.put("appointment_time", time);
+        values.put("date", date);
+        values.put("time", time);
         values.put("patient_name", patientName);
 
         long result = db.insert("appointments", null, values);
@@ -238,6 +238,28 @@ public class Database extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return username;
+    }
+
+    // method to get appointments by username
+    public ArrayList<String>getAppointmentsByUsername(String username) {
+        ArrayList<String> appointments = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT doctor_name, hospital, fee, phone, date, time FROM appointments WHERE patient_name = ?", new String[]{username});
+        if (cursor.moveToFirst()) {
+            do {
+                String info = "Doctor: " + cursor.getString(0)
+                        + "\nHospital: " + cursor.getString(1)
+                        + "\nFee: KES " + cursor.getDouble(2)
+                        + "\nPhone: " + cursor.getString(3)
+                        + "\nDate: " + cursor.getString(4)
+                        + "\nTime: " + cursor.getString(5);
+                appointments.add(info);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return appointments;
     }
 
     // method to check if the user is available
