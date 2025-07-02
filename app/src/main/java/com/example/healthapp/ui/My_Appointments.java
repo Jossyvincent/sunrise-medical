@@ -17,7 +17,7 @@ import com.example.healthapp.database.Database;
 
 import java.util.ArrayList;
 
-public class MyAppointments extends AppCompatActivity {
+public class My_Appointments extends AppCompatActivity {
 
     ListView listView;
     Database db;

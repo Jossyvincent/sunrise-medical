@@ -40,7 +40,7 @@ public class Home extends AppCompatActivity {
         finddoctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(Home.this, Finddoctor.class);
+              Intent intent = new Intent(Home.this, Find_doctor.class);
               startActivity(intent);
               finish();
             }
@@ -50,12 +50,22 @@ public class Home extends AppCompatActivity {
         appointmentDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home.this, MyAppointments.class);
+                Intent intent = new Intent(Home.this, My_Appointments.class);
                 startActivity(intent);
                 finish();
             }
+        });
+        //lab test card view
+        CardView labTest = findViewById(R.id.lab_test);
+        labTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, Lab_Test.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
-            });
 
 
 

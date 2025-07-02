@@ -28,7 +28,7 @@ public class Book_appointment extends AppCompatActivity {
 
     TextView tv;
     EditText full_name,address, fee,phone_number,editTextDate,editTextTime ;
-    Button register;
+    Button register, back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +44,10 @@ public class Book_appointment extends AppCompatActivity {
         fee = findViewById(R.id.editTextconsultant_fee);
         phone_number = findViewById(R.id.editTextphonenumber);
         register = findViewById(R.id.buttonRegister);
+        back = findViewById(R.id.buttonappback);
         editTextDate = findViewById(R.id.editTextDate);
         editTextTime = findViewById(R.id.editTextTime);
+
         //disabling editing
         for (EditText field : new EditText[]{full_name, address, fee, phone_number}) {
             field.setKeyListener(null);
@@ -90,6 +92,14 @@ public class Book_appointment extends AppCompatActivity {
             }
 
 
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent back = new Intent(Book_appointment.this, Find_doctor.class);
+                startActivity(back);
+                finish();
+            }
         });
 
         // Date picker logic

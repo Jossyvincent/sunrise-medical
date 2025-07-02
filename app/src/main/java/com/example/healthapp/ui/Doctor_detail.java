@@ -32,9 +32,9 @@ public class Doctor_detail extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.doctordetail);
 
-        TextView tv = findViewById(R.id.textView2);
-        Button btn = findViewById(R.id.btnback);
-        listView = findViewById(R.id.listViewDoctors); //
+        TextView tv = findViewById(R.id.textView2labTest);
+        Button btn = findViewById(R.id.labTestBack);
+        listView = findViewById(R.id.listViewlabTests); //
 
         // Set title from previous activity
         Intent it = getIntent();
@@ -49,7 +49,7 @@ public class Doctor_detail extends AppCompatActivity {
 
         // Back button functionality
         btn.setOnClickListener(v -> {
-            Intent intent = new Intent(Doctor_detail.this, Finddoctor.class);
+            Intent intent = new Intent(Doctor_detail.this, Find_doctor.class);
             startActivity(intent);
             finish();
         });
