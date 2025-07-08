@@ -62,11 +62,17 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Home.this, Lab_Test.class);
                 startActivity(intent);
-                finish();
             }
         });
-
-
+        //buy medicine card view
+        CardView buyMedicine = findViewById(R.id.buy_medicine);
+        buyMedicine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, BuyMedicine.class);
+                startActivity(intent);
+            }
+        });
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

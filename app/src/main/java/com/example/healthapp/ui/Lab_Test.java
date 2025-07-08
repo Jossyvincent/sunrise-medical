@@ -42,7 +42,7 @@ public class Lab_Test extends AppCompatActivity {
         adapter = new LabTestAdapter(this, labTests);
         listView.setAdapter(adapter);
 
-        // ✅ Handle 'Add to Cart' button
+        // ✅ Handle 'Add to CartActivity' button
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

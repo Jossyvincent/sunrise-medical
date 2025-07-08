@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/back2"
+    android:padding="16dp"
+    tools:context=".ui.BuyMedicine">
+
+    <TextView
+        android:id = "@+id/buymedicine_Textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BUY MEDICINE WITH US"
+        android:textStyle="bold"
+        android:textColor="@color/purple_200"
+        android:textSize="30sp" />
+    <ListView
+        android:id = "@+id/buymedicine_Listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight= "1"/>
+    <Button
+        android:id = "@+id/buymedicine_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View cart"/>
+
+</LinearLayout>
