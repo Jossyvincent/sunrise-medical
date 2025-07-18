@@ -45,6 +45,15 @@ public class Database extends SQLiteOpenHelper {
     private static final  String COLUMN_APPOINTMENT_TIME ="time";
     private static final  String COLUMN_PATIENT_NAME = "patient_name";
 
+    // columns for order table
+
+    private static final String TABLE_ORDERS = "orders";
+    private static final String COLUMN_ORDER_ID = "id";
+    private static final String COLUMN_PATIENT_NAME_ORDER = "patient_name";
+    private static final String COLUMN_MEDICINE_NAME = "medicine_name";
+    private static final String COLUMN_MEDICINE_FEE = "medicine_price";
+
+
 
     // The constructor
     public Database(Context context) {
@@ -73,6 +82,15 @@ public class Database extends SQLiteOpenHelper {
                 COLUMN_PATIENT_NAME + " TEXT, " +
                 COLUMN_APPOINTMENT_TIME + " TEXT" + ")";
         db.execSQL(CREATE_APPOINTMENTS_TABLE);
+
+        //creating orders table for handling medicine orders
+        String CREATE_ORDERS_TABLE = "CREATE TABLE " + TABLE_ORDERS + " (" +
+                COLUMN_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_PATIENT_NAME_ORDER + " TEXT, " +
+                COLUMN_MEDICINE_NAME + " TEXT, " +
+                COLUMN_MEDICINE_FEE + " REAL" +
+                ")";
+        db.execSQL(CREATE_ORDERS_TABLE);
 
         // create doctors table
         String CREATE_DOCTORS_TABLE = "CREATE TABLE " + TABLE_DOCTORS + " (" +
@@ -155,6 +173,17 @@ public class Database extends SQLiteOpenHelper {
         values.put(COLUMN_HOSPITAL, "Doctors plaza");
         values.put(COLUMN_DOCTOR_EMAIL, "jossy@gmail.com");
         db.insert(TABLE_DOCTORS,null, values);
+    }
+    //method to add order details to the order table
+    public boolean insertOrder(String patientName,String medicineName, float medicineFee ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PATIENT_NAME_ORDER, patientName);
+        values.put(COLUMN_MEDICINE_NAME, medicineName);
+        values.put(COLUMN_MEDICINE_FEE, medicineFee);
+
+        long result = db.insert(TABLE_ORDERS, null, values);
+        return result != -1;
     }
 
     //get ALL doctors method

@@ -2,10 +2,10 @@ package com.example.healthapp.models;
 
 public class Medicine {
     private String name;
-    private double price;
+    private float price;
 
     // the constructor
-    public Medicine(String name, double price){
+    public Medicine(String name, float price){
         this.name = name;
         this.price = price;
     }
@@ -13,7 +13,7 @@ public class Medicine {
     public String getName() {
         return name;
     }
-    public double getPrice(){
+    public float getPrice(){
         return price;
     }
     @Override

@@ -1,5 +1,7 @@
 package com.example.healthapp.ui;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,16 +16,19 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.healthapp.R;
+import com.example.healthapp.database.Database;
 import com.example.healthapp.models.Cart;
 import com.example.healthapp.models.Medicine;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
 
     Button ConfirmOrderBtn;
     ListView CartListView;
     TextView TotalTextView;
+    private Database dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +52,7 @@ public class CartActivity extends AppCompatActivity {
         TotalTextView.setText("Total: ksh " + total );
 
         ConfirmOrderBtn.setOnClickListener(v ->{
-            Toast.makeText(this, "Order placed", Toast.LENGTH_SHORT).show();
-            Cart.cartItems.clear();
-            finish();
+            placeOrderAndProceed();
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -58,4 +61,37 @@ public class CartActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    private void placeOrderAndProceed() {
+        boolean success = true;
+        Database dbHelper = new Database(this);
+
+        //retrieve Logged in user from sharedPreferences
+        SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        String loggedInUsername = preferences.getString("username", "Unknown User");
+
+        for (Medicine item :Cart.cartItems) {
+            boolean inserted = dbHelper.insertOrder(
+                    loggedInUsername,
+                    item.getName(),
+                    item.getPrice()
+            );
+
+            if (!inserted){
+                success = false;
+                break;
+            }
+        }
+
+        if(success) {
+            Toast.makeText(this,"Order placed!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(CartActivity.this, OrderConfirmationActivity.class);
+            startActivity(intent);
+            finish(); //optional
+        } else {
+            Toast.makeText(this,"Failed to place order.",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }
